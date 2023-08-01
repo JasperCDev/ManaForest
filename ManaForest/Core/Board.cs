@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ManaForest
+namespace ManaForest.Core
 {
     public enum SpaceType
     {
@@ -19,7 +19,7 @@ namespace ManaForest
         public SpaceType type;
         public string id;
 
-        public BoardSpace(string spaceId, SpaceType spaceType) 
+        public BoardSpace(string spaceId, SpaceType spaceType)
         {
             type = spaceType;
             id = spaceId;
@@ -27,13 +27,14 @@ namespace ManaForest
 
         public void OnBoardSpaceClick()
         {
-            this.type = this.type == SpaceType.Empty ? SpaceType.Occupied : SpaceType.Empty;
+            type = type == SpaceType.Empty ? SpaceType.Occupied : SpaceType.Empty;
         }
     }
     public class Board
     {
         public BoardSpace[,] grid = new BoardSpace[3, 3];
-        public Board() { 
+        public Board()
+        {
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
