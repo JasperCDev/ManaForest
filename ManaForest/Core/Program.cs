@@ -1,2 +1,2 @@
-﻿using var game = new ManaForest.Core.Game1();
+﻿using var game = new ManaForest.Core.Game();
 game.Run();

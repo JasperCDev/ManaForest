@@ -8,9 +8,11 @@ namespace ManaForest.Core
 {
     public static class Data
     {
-        public static int ScreenWidth { get; set; } = 1600;
-        public static int ScreenHeight { get; set; } = 900;
+        public static int ScreenWidth { get; set; } = 1920;
+        public static int ScreenHeight { get; set; } = 1080;
         public static bool Exit { get; set; } = false;
+
+        public const int CANVAS_SIZE = 32;
         public enum Scenes
         {
             MainMenu,

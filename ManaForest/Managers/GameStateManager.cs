@@ -9,8 +9,8 @@ namespace ManaForest.Managers
 {
     internal class GameStateManager : Component
     {
-        private GameScene gameScene = new GameScene();
-        private MainMenuScene mainMenuScene = new MainMenuScene();
+        private readonly GameScene gameScene = new();
+        private readonly MainMenuScene mainMenuScene = new();
         public GameStateManager()
         {
         }
