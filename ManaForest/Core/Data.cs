@@ -11,6 +11,7 @@ namespace ManaForest.Core
         public static int ScreenWidth { get; set; } = 1920;
         public static int ScreenHeight { get; set; } = 1080;
         public static bool Exit { get; set; } = false;
+        public static bool LoadingScene { get; set; }
 
         public const int CANVAS_SIZE = 32;
         public enum Scenes
@@ -18,6 +19,6 @@ namespace ManaForest.Core
             MainMenu,
             Game,
         }
-        public static Scenes CurrentScene { get; set; } = Scenes.Game;
+        public static Scenes CurrentScene { get; set; } = Scenes.MainMenu;
     }
 }

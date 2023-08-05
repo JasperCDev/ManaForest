@@ -27,3 +27,4 @@ C:\Users\Jasper\source\repos\ManaForest\ManaForest\obj\Debug\net6.0\ref\ManaFore
 C:\Users\Jasper\source\repos\ManaForest\ManaForest\bin\Debug\net6.0\Content\pixil-frame-0 (3).xnb
 C:\Users\Jasper\source\repos\ManaForest\ManaForest\bin\Debug\net6.0\Content\pixil-frame-0.xnb
 C:\Users\Jasper\source\repos\ManaForest\ManaForest\bin\Debug\net6.0\Content\tile.xnb
+C:\Users\Jasper\source\repos\ManaForest\ManaForest\bin\Debug\net6.0\Content\start button.xnb

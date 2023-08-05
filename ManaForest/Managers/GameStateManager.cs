@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using ManaForest.Core;
 using Microsoft.Xna.Framework.Content;
 using ManaForest.Scenes;
+using System;
+using System.Diagnostics;
 
 namespace ManaForest.Managers
 {
@@ -30,6 +32,7 @@ namespace ManaForest.Managers
 
         internal override void LoadContent(ContentManager content)
         {
+            Debug.WriteLine($"hey this is load content for {Data.CurrentScene}");
             switch (Data.CurrentScene)
             {
                 case Data.Scenes.MainMenu:

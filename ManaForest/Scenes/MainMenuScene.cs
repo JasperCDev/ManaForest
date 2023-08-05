@@ -1,4 +1,5 @@
 ﻿using ManaForest.Core;
+using ManaForest.Core.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,19 +13,23 @@ namespace ManaForest.Scenes
 {
     internal class MainMenuScene : Component
     {
+        private Button startButton = new Button();
+        public MainMenuScene() { 
+            
+        }
         internal override void Draw(SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+            startButton.Draw(spriteBatch);
         }
 
         internal override void LoadContent(ContentManager content)
         {
-            throw new NotImplementedException();
+            startButton.LoadContent(content);
         }
 
         internal override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            startButton.Update(gameTime);
         }
     }
 }

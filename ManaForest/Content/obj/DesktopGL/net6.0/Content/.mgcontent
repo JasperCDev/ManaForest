@@ -6,8 +6,10 @@
   <SourceFiles>
     <File>C:/Users/Jasper/source/repos/ManaForest/ManaForest/Content/pixil-frame-0 (3).png</File>
     <File>C:/Users/Jasper/source/repos/ManaForest/ManaForest/Content/pixil-frame-0.png</File>
+    <File>C:/Users/Jasper/source/repos/ManaForest/ManaForest/Content/start button.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

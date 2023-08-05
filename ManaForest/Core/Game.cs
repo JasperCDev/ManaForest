@@ -1,10 +1,6 @@
 ﻿using ManaForest.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Diagnostics;
-using System.Reflection.Metadata;
 
 namespace ManaForest.Core
 {
@@ -46,6 +42,11 @@ namespace ManaForest.Core
 
         protected override void Update(GameTime gameTime)
         {
+            if (Data.LoadingScene)
+            {
+                this.LoadContent();
+                Data.LoadingScene = false;
+            }
             gameStateManager.Update(gameTime);
             inputManager.Update(gameTime);
             base.Update(gameTime);
@@ -53,16 +54,20 @@ namespace ManaForest.Core
 
         protected override void Draw(GameTime gameTime)
         {
+            if (Data.LoadingScene)
+            {
+                return;
+            }
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             gameStateManager.Draw(spriteBatch);
             inputManager.Draw(spriteBatch);
             spriteBatch.End();
-
             base.Draw(gameTime);
-            GraphicsDevice.SetRenderTarget(null);
 
+            // Render Target stuff
+            GraphicsDevice.SetRenderTarget(null);
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.Draw(

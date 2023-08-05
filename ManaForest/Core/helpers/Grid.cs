@@ -1,12 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 
 namespace ManaForest.Core.helpers
@@ -16,7 +8,7 @@ namespace ManaForest.Core.helpers
         Empty,
         Occupied
     }
-     internal class GridCell : Component
+    internal class GridCell
     {
         public CellType type;
         public string id;
@@ -26,29 +18,8 @@ namespace ManaForest.Core.helpers
             type = spaceType;
             id = spaceId;
         }
-
-        public void OnCellClick()
-        {
-            Debug.WriteLine("Tile Cell " + id + " Clicked!");
-            type = CellType.Occupied;
-        }
-
-        internal override void Draw(SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal override void LoadContent(ContentManager content)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
     }
-    internal class Grid : Component
+    internal class Grid
     {
         private readonly int width;
         private readonly int height;
@@ -60,27 +31,12 @@ namespace ManaForest.Core.helpers
             Init();
         }
 
-        internal override void Draw(SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal override void LoadContent(ContentManager content)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
         private void Init()
         {
             var rows = new GridCell[width, height];
-            for (int i = 0; i < width; i++)
+            for (int i = 0; i < rows.GetLength(0); i++)
             {
-                for (int j = 0; j < height; j++)
+                for (int j = 0; j < rows.GetLength(1); j++)
                 {
                     string id = i.ToString() + j.ToString();
                     rows[i, j] = new GridCell(id, CellType.Empty);
