@@ -1,4 +1,5 @@
-﻿using ManaForest.Managers;
+﻿using ManaForest.Core.GameObjects;
+using ManaForest.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,13 +12,14 @@ namespace ManaForest.Core
         private GameStateManager gameStateManager;
         private InputManager inputManager;
         private SpriteBatch spriteBatch;
+        private Selector selector;
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             // Managers
             gameStateManager = new GameStateManager();
             inputManager = new InputManager();
-
+            selector = new Selector();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -30,7 +32,7 @@ namespace ManaForest.Core
             graphics.ApplyChanges();
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            renderTarget = new RenderTarget2D(GraphicsDevice, 512, 288);
+            renderTarget = new RenderTarget2D(GraphicsDevice, Data.TARGET_WIDTH, Data.TARGET_HEIGHT);
 
         }
 
@@ -49,6 +51,7 @@ namespace ManaForest.Core
             }
             gameStateManager.Update(gameTime);
             inputManager.Update(gameTime);
+            selector.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -63,13 +66,14 @@ namespace ManaForest.Core
             spriteBatch.Begin();
             gameStateManager.Draw(spriteBatch);
             inputManager.Draw(spriteBatch);
+            selector.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
 
             // Render Target stuff
             GraphicsDevice.SetRenderTarget(null);
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             spriteBatch.Draw(
                 texture: renderTarget,
                 position: Vector2.Zero,
@@ -77,7 +81,7 @@ namespace ManaForest.Core
                 color: Color.White,
                 rotation: 0f,
                 origin: Vector2.Zero,
-                scale: 3.75f,
+                scale: 5f,
                 effects: SpriteEffects.None,
                 layerDepth: 0f
             );

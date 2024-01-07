@@ -1,50 +1,75 @@
-﻿using ManaForest.Core.helpers;
-using ManaForest.Managers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManaForest.Core.GameObjects
 {
     internal class TileMap : Component
     {
-        private Grid grid = new(16, 9);
-        private Texture2D tileTexture;
-        public TileMap() { }
+        private readonly Tile[,] tiles;
+        public TileMap() {
+            tiles = InitTiles();
+            Delegates.hoeTiles = HandleHoeTiles;
+        }
         internal override void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < grid.rows.GetLength(0); i++)
+            for (int i = 0; i < tiles.GetLength(0); i++)
             {
-                for (int j = 0; j < grid.rows.GetLength(1); j++)
+                for (int j = 0; j < tiles.GetLength(1); j++)
                 {
-                    var tile = grid.rows[i, j];
-                    var x = Data.CANVAS_SIZE * i;
-                    var y = Data.CANVAS_SIZE * j;
-                    Rectangle rect = new(x, y, Data.CANVAS_SIZE, Data.CANVAS_SIZE);
-                    Color tileColor = InputManager.MouseRect.Intersects(rect) ? Color.White : Color.Black;
-                    spriteBatch.Draw(
-                        tileTexture,
-                        rect,
-                        tileColor
-                    );
+                    var tile = tiles[i, j];
+                    tile.Draw(spriteBatch);
                 }
             }
         }
 
+        private void HandleHoeTiles(Rectangle selector)
+        {
+            Debug.WriteLine("HandleHoeTiles");
+            for (int i = 0; i < tiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < tiles.GetLength(1); j++)
+                {
+                    Tile tile = tiles[i, j];
+                    if (tile.rect.Intersects(selector))
+                    {
+                        tile.Hoe();
+                    }
+                }
+            }
+        }
+
+        private static Tile[,] InitTiles()
+        {
+            int columns = Data.TARGET_WIDTH / Data.CANVAS_SIZE;
+            int rows = Data.TARGET_HEIGHT / Data.CANVAS_SIZE;
+            var tiles = new Tile[columns, rows];
+            for (int i = 0; i < tiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < tiles.GetLength(1); j++)
+                {
+                    tiles[i, j] = new Tile(i * Data.CANVAS_SIZE, j * Data.CANVAS_SIZE, CellType.Empty);
+                }
+            }
+            return tiles;
+        }
+
         internal override void LoadContent(ContentManager content)
         {
-            tileTexture = content.Load<Texture2D>("tile");
+            foreach (var tile in tiles)
+            {
+                tile.LoadContent(content);
+            }
         }
 
         internal override void Update(GameTime gameTime)
         {
-            return;
+            foreach (var tile in tiles)
+            {
+                tile.Update(gameTime);
+            }
         }
     }
 }

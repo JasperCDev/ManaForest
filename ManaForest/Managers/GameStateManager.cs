@@ -32,7 +32,6 @@ namespace ManaForest.Managers
 
         internal override void LoadContent(ContentManager content)
         {
-            Debug.WriteLine($"hey this is load content for {Data.CurrentScene}");
             switch (Data.CurrentScene)
             {
                 case Data.Scenes.MainMenu:

@@ -3,26 +3,20 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManaForest.Managers
 {
     internal class InputManager : Component
     {
 
-        public static MouseState OldMouseState { get; set; }
-        public static MouseState MouseState { get; set; } = Mouse.GetState();
-        public static Rectangle MouseRect { get; set; }
+        public static MouseState OldMouseState { get; private set; }
+        public static MouseState MouseState { get; private set; } = Mouse.GetState();
+        public static Rectangle MouseRect { get; private set; }
 
-
-        private static Rectangle getMouseRect()
+        private static Rectangle GetMouseRect()
         {
-            float x = (float)(MouseState.X / 3.75);
-            float y = (float)(MouseState.Y / 3.75);
+            float x = MouseState.X / 5;
+            float y = MouseState.Y / 5;
 
             return new((int)x, (int)y, 1, 1);
         }
@@ -32,7 +26,26 @@ namespace ManaForest.Managers
         {
             OldMouseState = MouseState;
             MouseState = Mouse.GetState();
-            MouseRect = getMouseRect();
+            MouseRect = GetMouseRect();
+        }
+
+        public static bool IsClick(Rectangle rect)
+        {
+            bool isIntersecting = MouseRect.Intersects(rect);
+            bool wasPressed = OldMouseState.LeftButton == ButtonState.Pressed;
+            bool wasReleased = MouseState.LeftButton == ButtonState.Released;
+            return isIntersecting && wasPressed && wasReleased;
+        }
+        public static bool IsClick()
+        {
+            bool wasPressed = OldMouseState.LeftButton == ButtonState.Pressed;
+            bool wasReleased = MouseState.LeftButton == ButtonState.Released;
+            return wasPressed && wasReleased;
+        }
+
+        public static bool IsHover(Rectangle rect)
+        {
+            return MouseRect.Intersects(rect);
         }
 
         internal override void Draw(SpriteBatch spriteBatch)

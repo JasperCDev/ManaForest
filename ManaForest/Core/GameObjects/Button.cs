@@ -20,7 +20,6 @@ namespace ManaForest.Core.GameObjects
 
         internal override void Draw(SpriteBatch spriteBatch)
         {
-
             Vector2 position = new(
                 x,
                 y
@@ -34,13 +33,7 @@ namespace ManaForest.Core.GameObjects
 
         }
 
-        private bool IsClick()
-        {
-            bool isIntersecting = InputManager.MouseRect.Intersects(rect);
-            bool wasPressed = InputManager.OldMouseState.LeftButton == ButtonState.Pressed;
-            bool wasReleased = InputManager.MouseState.LeftButton == ButtonState.Released;
-            return isIntersecting && wasPressed && wasReleased;
-        }
+
 
         internal override void Update(GameTime gameTime)
         {
@@ -48,7 +41,7 @@ namespace ManaForest.Core.GameObjects
             y = (Core.Game.renderTarget.Height / 2) - (texture.Height / 2);
             rect = new(x, y, texture.Width, texture.Height);
 
-            if (IsClick())
+            if (InputManager.IsClick(rect))
             {
                 Data.CurrentScene = Data.Scenes.Game;
                 Data.LoadingScene = true;
