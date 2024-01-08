@@ -12,6 +12,7 @@ namespace ManaForest.Core.GameObjects
         public TileMap() {
             tiles = InitTiles();
             Delegates.hoeTiles = HandleHoeTiles;
+            Delegates.waterTiles += HandleWaterTiles;
         }
         internal override void Draw(SpriteBatch spriteBatch)
         {
@@ -27,7 +28,6 @@ namespace ManaForest.Core.GameObjects
 
         private void HandleHoeTiles(Rectangle selector)
         {
-            Debug.WriteLine("HandleHoeTiles");
             for (int i = 0; i < tiles.GetLength(0); i++)
             {
                 for (int j = 0; j < tiles.GetLength(1); j++)
@@ -36,6 +36,21 @@ namespace ManaForest.Core.GameObjects
                     if (tile.rect.Intersects(selector))
                     {
                         tile.Hoe();
+                    }
+                }
+            }
+        }
+
+        private void HandleWaterTiles(Rectangle selector)
+        {
+            for (int i = 0; i < tiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < tiles.GetLength(1); j++)
+                {
+                    Tile tile = tiles[i, j];
+                    if (tile.rect.Intersects(selector))
+                    {
+                        tile.Water();
                     }
                 }
             }

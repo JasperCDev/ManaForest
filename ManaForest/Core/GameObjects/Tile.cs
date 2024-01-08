@@ -52,8 +52,12 @@ namespace ManaForest.Core.GameObjects
 
         public void Hoe()
         {
-            this.type = CellType.Occupied;
             this.tileColor = Color.Brown;
+        }
+
+        public void Water()
+        {
+            this.tileColor = Color.Blue;
         }
     }
 }

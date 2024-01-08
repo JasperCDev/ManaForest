@@ -12,14 +12,13 @@ namespace ManaForest.Core
         private GameStateManager gameStateManager;
         private InputManager inputManager;
         private SpriteBatch spriteBatch;
-        private Selector selector;
+
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             // Managers
             gameStateManager = new GameStateManager();
             inputManager = new InputManager();
-            selector = new Selector();
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -51,7 +50,6 @@ namespace ManaForest.Core
             }
             gameStateManager.Update(gameTime);
             inputManager.Update(gameTime);
-            selector.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -66,7 +64,6 @@ namespace ManaForest.Core
             spriteBatch.Begin();
             gameStateManager.Draw(spriteBatch);
             inputManager.Draw(spriteBatch);
-            selector.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
 

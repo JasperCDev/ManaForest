@@ -11,5 +11,8 @@ namespace ManaForest.Core
     {
         public delegate void HoeTiles(Rectangle selectorRect);
         public static HoeTiles hoeTiles;
+
+        public delegate void WaterTiles(Rectangle selectorRect);
+        public static WaterTiles waterTiles;
     }
 }
