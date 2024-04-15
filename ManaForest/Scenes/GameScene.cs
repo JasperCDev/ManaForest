@@ -25,8 +25,8 @@ namespace ManaForest.Scenes
         internal override void Update(GameTime gameTime)
         {
             tilemap.Update(gameTime);
-            selector.Update(gameTime);
             toolbar.Update(gameTime);
+            selector.Update(gameTime);
         }
         internal override void Draw(SpriteBatch spriteBatch)
         {

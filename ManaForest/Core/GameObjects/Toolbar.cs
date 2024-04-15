@@ -19,7 +19,6 @@ namespace ManaForest.Core.GameObjects
         {
             Hoe,
             WateringCan,
-
         }
         public static Tool SelectedTool = Tool.Hoe;
         public Toolbar()

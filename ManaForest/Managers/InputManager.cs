@@ -12,6 +12,7 @@ namespace ManaForest.Managers
         public static MouseState OldMouseState { get; private set; }
         public static MouseState MouseState { get; private set; } = Mouse.GetState();
         public static Rectangle MouseRect { get; private set; }
+        public static bool clickedThisFrame = false;
 
         private static Rectangle GetMouseRect()
         {
@@ -31,16 +32,34 @@ namespace ManaForest.Managers
 
         public static bool IsClick(Rectangle rect)
         {
+            if (clickedThisFrame)
+            {
+                return false;
+            }
             bool isIntersecting = MouseRect.Intersects(rect);
             bool wasPressed = OldMouseState.LeftButton == ButtonState.Pressed;
             bool wasReleased = MouseState.LeftButton == ButtonState.Released;
-            return isIntersecting && wasPressed && wasReleased;
+            bool isClick = isIntersecting && wasPressed && wasReleased;
+            if (isClick)
+            {
+                clickedThisFrame = true;
+            }
+            return isClick;
         }
         public static bool IsClick()
         {
+            if (clickedThisFrame)
+            {
+                return false;
+            }
             bool wasPressed = OldMouseState.LeftButton == ButtonState.Pressed;
             bool wasReleased = MouseState.LeftButton == ButtonState.Released;
-            return wasPressed && wasReleased;
+            bool isClick = wasPressed && wasReleased;
+            if (isClick)
+            {
+                clickedThisFrame = true;
+            }
+            return isClick;
         }
 
         public static bool IsHover(Rectangle rect)

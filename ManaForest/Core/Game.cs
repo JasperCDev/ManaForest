@@ -51,6 +51,8 @@ namespace ManaForest.Core
             gameStateManager.Update(gameTime);
             inputManager.Update(gameTime);
             base.Update(gameTime);
+            // reset
+            InputManager.clickedThisFrame = false;
         }
 
         protected override void Draw(GameTime gameTime)
